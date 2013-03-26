@@ -13,6 +13,10 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
+    //TODO: Disable Edit the `messageBoard`
 }
 
+- (IBAction)loadDriver:(id)sender {
+    _notifyMessage.stringValue = @"hello";
+}
 @end

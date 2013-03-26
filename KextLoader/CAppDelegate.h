@@ -7,9 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "CDropView.h"
 
 @interface CAppDelegate : NSObject <NSApplicationDelegate>
+@property (weak) IBOutlet NSButton *loadDriver;
+@property (weak) IBOutlet NSTextField *notifyMessage;
+@property (weak) IBOutlet NSProgressIndicator *runningIndicator;
+@property (weak) IBOutlet NSScrollView *messageBoard;
+@property (weak) IBOutlet CDropView *DropZone;
 
 @property (assign) IBOutlet NSWindow *window;
+- (IBAction)loadDriver:(id)sender;
 
 @end

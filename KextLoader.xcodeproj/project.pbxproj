@@ -17,6 +17,7 @@
 		205AAFBC1700A4F6008EFD2D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 205AAF9C1700A4F5008EFD2D /* Cocoa.framework */; };
 		205AAFC41700A4F6008EFD2D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 205AAFC21700A4F6008EFD2D /* InfoPlist.strings */; };
 		205AAFC71700A4F6008EFD2D /* KextLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 205AAFC61700A4F6008EFD2D /* KextLoaderTests.m */; };
+		205AAFD21700AA40008EFD2D /* CDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 205AAFD11700AA40008EFD2D /* CDropView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		205AAFC31700A4F6008EFD2D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		205AAFC51700A4F6008EFD2D /* KextLoaderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KextLoaderTests.h; sourceTree = "<group>"; };
 		205AAFC61700A4F6008EFD2D /* KextLoaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KextLoaderTests.m; sourceTree = "<group>"; };
+		205AAFD01700AA40008EFD2D /* CDropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDropView.h; sourceTree = "<group>"; };
+		205AAFD11700AA40008EFD2D /* CDropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDropView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 				205AAFAE1700A4F6008EFD2D /* CAppDelegate.h */,
 				205AAFAF1700A4F6008EFD2D /* CAppDelegate.m */,
 				205AAFB11700A4F6008EFD2D /* MainMenu.xib */,
+				205AAFD01700AA40008EFD2D /* CDropView.h */,
+				205AAFD11700AA40008EFD2D /* CDropView.m */,
 				205AAFA31700A4F6008EFD2D /* Supporting Files */,
 			);
 			path = KextLoader;
@@ -264,6 +269,7 @@
 			files = (
 				205AAFA91700A4F6008EFD2D /* main.m in Sources */,
 				205AAFB01700A4F6008EFD2D /* CAppDelegate.m in Sources */,
+				205AAFD21700AA40008EFD2D /* CDropView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
