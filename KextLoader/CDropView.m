@@ -7,6 +7,7 @@
 //
 
 #import "CDropView.h"
+#import <IOKit/kext/KextManager.h>
 
 @implementation CDropView
 
@@ -31,14 +32,27 @@
 
 - (BOOL) performDragOperation:(id<NSDraggingInfo>)sender
 {
+    BOOL bReturn = YES;
     NSPasteboard* pPboard = [sender draggingPasteboard];
     
     if ([[pPboard types] containsObject: NSURLPboardType])
     {
         NSURL* pFileURL = [NSURL URLFromPasteboard: pPboard];
         NSLog(@"file Path %@\n", [pFileURL path]);
+        
+        //Load Kexts
+        CFURLRef kextUrl = (__bridge CFURLRef)pFileURL;
+        OSReturn result = KextManagerLoadKextWithURL(kextUrl, NULL);
+        CFRelease(kextUrl);
+        if (result != kOSReturnSuccess)
+        {
+            NSLog(@"Cannot load kext from %@\n", [pFileURL path]);
+            bReturn = NO;
+            goto EXIT;
+        }
     }
     
-    return YES;
+EXIT:
+    return bReturn;
 }
 @end
