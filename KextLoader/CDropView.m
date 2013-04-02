@@ -34,9 +34,7 @@
 - (BOOL)installKLogKext: (NSString*) sourcePath
         DestinationPath: (NSString*) destPath
 {
-//    NSString *              sourcePath = [[NSBundle mainBundle] pathForResource:@"KLog" ofType:@"kext"];
-//    NSString *              destPath = [NSString pathWithComponents:[NSArray arrayWithObjects:@"/",@"System",@"Library",@"Extensions",@"KLog.kext",nil]];
-    NSString *              permRepairPath = [[NSBundle mainBundle] pathForResource:@"SetKLogPermissions" ofType:@"sh"];
+    NSString *              permRepairPath = [[NSBundle mainBundle] pathForResource:@"SetKextPermissions" ofType:@"sh"];
     
     AuthorizationRights     myRights;
     AuthorizationItem       myItems[1];
@@ -44,7 +42,8 @@
     OSStatus                err;
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:sourcePath] == NO) {
-        NSRunAlertPanel (@"Missing Source File", @"\"KLog.kext\" could not be installed because it is missing from the application bundle.", @"Okay", nil, nil);
+        NSString* msgFormat = [[NSString alloc] initWithFormat: @"\"%@\" could not be installed because it is missing from the application bundle.", [destPath lastPathComponent]];
+        NSRunAlertPanel (@"Missing Source File", msgFormat, @"Okay", nil, nil);
         return NO;
     }
     
@@ -56,11 +55,12 @@
     myRights.count = sizeof(myItems) / sizeof(myItems[0]);
     myRights.items = myItems;
     
+    //권한 획득
     err = AuthorizationCreate (&myRights, kAuthorizationEmptyEnvironment, kAuthorizationFlagInteractionAllowed | kAuthorizationFlagExtendRights, &authorizationRef);
     
     if (err == errAuthorizationSuccess) {
         char *  cpArgs[4];
-        char *  shArgs[2];
+        char *  shArgs[3];
         char *  kextloadArgs[2];
         int     status;
         
@@ -73,7 +73,8 @@
         if (err) return NO;
         
         shArgs[0] = (char *)[permRepairPath cStringUsingEncoding:NSUTF8StringEncoding];
-        shArgs[1] = NULL;
+        shArgs[1] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
+        shArgs[2] = NULL;
         
         err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/sh", 0, shArgs, NULL);
         if (err) return NO;
@@ -88,6 +89,7 @@
             // wait for forked process to terminate
         }
         
+        //권한 획득 종료
         AuthorizationFree(authorizationRef, kAuthorizationFlagDestroyRights);
         return YES;
     } else {
