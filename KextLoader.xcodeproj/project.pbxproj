@@ -18,6 +18,7 @@
 		205AAFC41700A4F6008EFD2D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 205AAFC21700A4F6008EFD2D /* InfoPlist.strings */; };
 		205AAFC71700A4F6008EFD2D /* KextLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 205AAFC61700A4F6008EFD2D /* KextLoaderTests.m */; };
 		205AAFD21700AA40008EFD2D /* CDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 205AAFD11700AA40008EFD2D /* CDropView.m */; };
+		20716AC3170AFBBE00C02735 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D4C24A170356C500EFADD3 /* Security.framework */; };
 		20D4C249170351B200EFADD3 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D4C248170351B200EFADD3 /* IOKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 			files = (
 				20D4C249170351B200EFADD3 /* IOKit.framework in Frameworks */,
 				205AAF9D1700A4F5008EFD2D /* Cocoa.framework in Frameworks */,
+				20716AC3170AFBBE00C02735 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +397,7 @@
 		205AAFCB1700A4F6008EFD2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KextLoader/KextLoader-Prefix.pch";
@@ -407,6 +410,7 @@
 		205AAFCC1700A4F6008EFD2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KextLoader/KextLoader-Prefix.pch";
