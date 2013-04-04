@@ -64,6 +64,7 @@
         char *  kextloadArgs[2];
         int     status;
         
+        //copy kext to target (/tmp) directory
         cpArgs[0] = "-r";
         cpArgs[1] = (char *)[sourcePath cStringUsingEncoding:NSUTF8StringEncoding];
         cpArgs[2] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
@@ -72,6 +73,7 @@
         err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/cp", 0, cpArgs, NULL);
         if (err) return NO;
         
+        //run script (SetKextPermission.sh)
         shArgs[0] = (char *)[permRepairPath cStringUsingEncoding:NSUTF8StringEncoding];
         shArgs[1] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
         shArgs[2] = NULL;
@@ -79,15 +81,15 @@
         err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/sh", 0, shArgs, NULL);
         if (err) return NO;
         
+        //load kext
         kextloadArgs[0] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
         kextloadArgs[1] = NULL;
         
         err = AuthorizationExecuteWithPrivileges(authorizationRef, "/sbin/kextload", 0, kextloadArgs, NULL);
         if (err) return NO;
         
-        while (wait(&status) != -1) {
-            // wait for forked process to terminate
-        }
+        // wait for forked process to terminate
+        while (wait(&status) != -1) { }
         
         //권한 획득 종료
         AuthorizationFree(authorizationRef, kAuthorizationFlagDestroyRights);
