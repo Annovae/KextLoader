@@ -70,7 +70,7 @@
         cpArgs[2] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
         cpArgs[3] = NULL;
         
-        err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/cp", 0, cpArgs, NULL);
+        err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/cp", kAuthorizationFlagDefaults, cpArgs, NULL);
         if (err) return NO;
         
         //run script (SetKextPermission.sh)
@@ -78,14 +78,14 @@
         shArgs[1] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
         shArgs[2] = NULL;
         
-        err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/sh", 0, shArgs, NULL);
+        err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/sh", kAuthorizationFlagDefaults, shArgs, NULL);
         if (err) return NO;
         
         //load kext
         kextloadArgs[0] = (char *)[destPath cStringUsingEncoding:NSUTF8StringEncoding];
         kextloadArgs[1] = NULL;
         
-        err = AuthorizationExecuteWithPrivileges(authorizationRef, "/sbin/kextload", 0, kextloadArgs, NULL);
+        err = AuthorizationExecuteWithPrivileges(authorizationRef, "/sbin/kextload", kAuthorizationFlagDefaults, kextloadArgs, NULL);
         if (err) return NO;
         
         // wait for forked process to terminate
